@@ -1,0 +1,25 @@
+extends layout 
+
+block content 
+
+    div 
+        h2 Genre: #{genre.name}
+        
+    
+    div  
+        if genre_books.length 
+            p This #{genre.name} genre is associated with following books which needs to be removed first  
+            
+            each book in genre_books
+                ul 
+                    li 
+                        a(href=book.url) #{book.title}
+        
+        else
+            p Do you really want to delete this #{genre.name} genre
+
+            form(method='POST')
+                div.form-group
+                    input#genreid.form-control(type='hidden', name='genreid', value=genre._id )
+
+                    button.btn.btn-primary(type='submit') Delete
